@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, Literal
 from inspect import signature
 from urllib.parse import urlparse, parse_qs
 
@@ -13,7 +13,7 @@ class ClickhouseProvider(HttpClient):
         *,
         host: str = "db.kylink.xyz",
         database: Optional[str] = None,
-        interface: Optional[str] = None,
+        interface: Literal["https", "http"] = None,
         port: int = 443,
         settings: Optional[Dict[str, Any]] = None,
         generic_args: Optional[Dict[str, Any]] = None,
@@ -50,7 +50,7 @@ class ClickhouseProvider(HttpClient):
                     settings[name] = value
 
         super().__init__(
-            "https",  # interface is always https
+            interface,
             host,
             port,
             api_token,  # username is api_token
