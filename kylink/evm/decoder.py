@@ -26,9 +26,13 @@ class SingleEventDecoder:
 
 
 class ContractDecoder:
-    def __init__(self, w3: Web3, contract_abi: Dict[str, Any], name=None):
+    def __init__(self, w3: Web3, contract_abi: list[Any]):
         self.abi = contract_abi
         self.contract = w3.eth.contract(abi=self.abi)
+        self.function_abi_dict = {
+            x["name"]: x for x in self.abi if x["type"] == "function"
+        }
+        self.event_abi_dict = {x["name"]: x for x in self.abi if x["type"] == "event"}
 
     def decode_event_log(self, event_name: str, log: Log) -> Dict[str, Any]:
         event = getattr(self.contract.events, event_name)
