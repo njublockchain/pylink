@@ -148,7 +148,6 @@ class EthereumProvider(ClickhouseProvider):
         # convert QueryResult to list of json object
         with stream:
             column_names = stream.source.column_names
-            print("column_names", column_names)
 
             blocks = [
                 {col: block[i] for i, col in enumerate(column_names)}
@@ -168,7 +167,6 @@ class EthereumProvider(ClickhouseProvider):
         # convert QueryResult to list of json object
         with stream:
             column_names = stream.source.column_names
-            print("column_names", column_names)
 
             transactions = [
                 {col: transaction[i] for i, col in enumerate(column_names)}
@@ -188,7 +186,6 @@ class EthereumProvider(ClickhouseProvider):
         # convert QueryResult to list of json object
         with stream:
             column_names = stream.source.column_names
-            print("column_names", column_names)
 
             traces = [
                 {col: trace[i] for i, col in enumerate(column_names)}
@@ -208,7 +205,6 @@ class EthereumProvider(ClickhouseProvider):
         # convert QueryResult to list of json object
         with stream:
             column_names = stream.source.column_names
-            print("column_names", column_names)
 
             events = [
                 {col: event[i] for i, col in enumerate(column_names)}
