@@ -21,6 +21,9 @@ class ClickhouseProvider(HttpClient):
     ):
         self._api_token = api_token
 
+        if interface is None:
+            interface = "https"
+
         if api_token is None and "user" in kwargs:
             api_token = kwargs.pop("user")
         if api_token is None and "user_name" in kwargs:
