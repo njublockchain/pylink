@@ -34,8 +34,14 @@ class TestEthereum(unittest.TestCase):
         print(result)
 
     def test_decode(self):
+        USDT_address = "0xdac17f958d2ee523a2206206994597c13d831ec7"
+        transfer_topic = (
+            "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        )
+
         log = self._kylink.eth.events(
-            "address = unhex('dac17f958d2ee523a2206206994597c13d831ec7')", limit=1
+            f"address = unhex('{USDT_address.removeprefix('0x')}') and topics[1] = unhex('{transfer_topic.removeprefix('0x')}')",
+            limit=1,
         )[0]
         # print(log)
         w3 = web3.Web3()
@@ -48,7 +54,7 @@ class TestEthereum(unittest.TestCase):
         abi = json.loads(TEST_ABI)
         decoder = ContractDecoder(w3, contract_abi=abi)
         result = decoder.decode_event_log(event_name="Transfer", log=log)
-        
+
         print(result)
 
 
